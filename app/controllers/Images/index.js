@@ -25,7 +25,7 @@ class Images extends ImagesService {
         );
       } else {
         // Otherwise
-        return Response.success(
+        return Response.failure(
           res,
           {
             message: 'No image matching your mood',

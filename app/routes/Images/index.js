@@ -3,18 +3,28 @@ const route = express.Router();
 
 // used to enable catching and handling errors globally
 const asyncHandler = require('express-async-handler');
+// For the http response codes
+const httpCode = require('../../commons/httpCode');
+// For building the response object
+const Response = require('../../commons/response');
 
 const ImagesController = require('../../controllers/Images');
 
 // For unimpleemnted routes
-route.all('/', (_req, _res) => {
-  return {
-    error: true,
-    code: 403,
-    data: { status: 403, msg: 'Forbidden Route' },
-    message: 'This route does not exists',
-  };
-});
+route.all(
+  '/',
+  asyncHandler((_req, _res) => {
+    return Response.failure(
+      res,
+      {
+        message: 'Route Not Implemented',
+        response: { status: 403 },
+      },
+      httpCode.FORBIDDEN
+    );
+  })
+);
+
 // Retreiveing all states
 route.get(
   '/:mood/:width/:height',

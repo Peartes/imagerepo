@@ -1,5 +1,13 @@
 // Import our cloudinary library
 const cloudinary = require('cloudinary').v2;
+cloudinary.config({
+  // eslint-disable-next-line no-undef
+  cloud_name: process.env.cloudinaryCloudName,
+  // eslint-disable-next-line no-undef
+  api_key: process.env.cloudinaryApiKey,
+  // eslint-disable-next-line no-undef
+  api_secret: process.env.cloudinaryApiSecret,
+});
 // Streamify to convert files to streams of bytes
 const streamify = require('streamifier');
 
