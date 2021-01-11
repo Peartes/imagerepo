@@ -10,6 +10,25 @@ class MongoDBHelper {
   }
 
   /**
+   * Fetches a single record randomly from the connected MongoDB instance.
+   *
+   * @param {String} mood the mood of the picture
+   */
+  getRandomImage(mood) {
+    return new Promise((resolve, reject) => {
+      return this.mongodbModel
+        .aggregate([{ $match: { tags: { $in: mood } } }])
+        .lean()
+        .then((docs) => {
+          return resolve(docs);
+        })
+        .catch((err) => {
+          return reject(err);
+        });
+    });
+  }
+
+  /**
    * Fetches a single record from the connected MongoDB instance.
    *
    * @param params

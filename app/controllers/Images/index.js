@@ -5,9 +5,14 @@ const httpCode = require('../../commons/httpCode');
 const ImagesService = require('../../services/images/index.js');
 
 class Images extends ImagesService {
+  /**
+   *
+   * @param {object} req The request object
+   * @param {object} res The resposne object
+   */
   async getImage(req, res) {
     try {
-      let result = await this.getImage({ mood: req.body.mood });
+      let result = await this.getRandomImage(req.param.mood);
       if (result) {
         // If we got an image for this particular mood, return them
         return Response.success(

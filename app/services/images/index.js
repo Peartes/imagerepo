@@ -22,12 +22,15 @@ class Images {
     return service !== undefined && service != null;
   }
 
-  // Get all state
-  async getImage(param) {
+  /**
+   *
+   * @param {String} mood an object containing
+   */
+  async getRandomImage(mood) {
     logger.info('IN-COMING PARAM', param);
     return new Promise((resolve, reject) => {
       this.mongoDBInstance
-        .getBulk(param)
+        .getRandomImage(param)
         .then((doc) => {
           resolve(doc);
         })
@@ -38,4 +41,4 @@ class Images {
   }
 }
 
-module.exports = ServiceMix;
+module.exports = Images;

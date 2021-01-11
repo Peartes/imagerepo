@@ -1,3 +1,8 @@
+// Import our cloudinary library
+const cloudinary = require('cloudinary').v2;
+// Streamify to convert files to streams of bytes
+const streamify = require('streamifier');
+
 class Utils {
   //  authenticate request parameters
   async authenticateParams(passedJson, neededFields) {
@@ -17,16 +22,15 @@ class Utils {
   // Upload image to Cloudinary
   /**
    *
-   * @param {} data The image to upload
-   * @param {} bucketName The name of the bucket to upload to
-   * @param {} key The file name or identifier for file
+   * @param {File} data The image to upload
+   * @param {String} key The file name or identifier for file
    * @returns response object with location field
    */
-  async uploadToCloud(data, key) {
+  async uploadToCloud(data, key, mood) {
     return new Promise((resolve, reject) => {
       let cloudinaryStream = cloudinary.uploader.upload_stream(
         {
-          folder: 'therapistFiles/' + key,
+          folder: mood + '/' + key,
         },
         (err, response) => {
           if (err) {
