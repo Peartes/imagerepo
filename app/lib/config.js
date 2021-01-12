@@ -8,7 +8,7 @@ const config = {
   outputDir: `${__dirname.replace('app/config', 'logs')}/`,
   mongo: {
     collections: {
-      Images: process.env.imageDb,
+      images: process.env.imageDB,
     },
   },
 };

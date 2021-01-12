@@ -1,15 +1,13 @@
+/* 
+  This file contains functions and modules to help the controller perform it work. Codes that otherwise could not go into the controller or is used by many is put here to reduce repeating it.
+*/
+// Multer for reading the file sent in the body if the request
 const multer = require('multer');
 
+// The maxsize of image allowed
 const maxSize = 1 * 1000 * 1000;
-// const storage = multer.diskStorage({
-//   destination: (_req, _file, callback) => {
-//     callback(null, '/tmp/uploads');
-//   },
-//   // TODO: Change filename to the user email
-//   filename: (req, file, callback) => {
-//     callback(null, req.body.email + file.originalname);
-//   },
-// });
+
+// The storage engine. For now save in disk while it write to our CDN
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
@@ -17,40 +15,25 @@ const fileFilter = (req, file, cb) => {
   if (
     !file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|PDF|pdf)$/)
   ) {
-    req.fileValidationError = 'Only image or pdf files are allowed!';
-    return cb(new Error('Only image  or pdf files are allowed!'), false);
+    req.fileValidationError = 'Only image files are allowed!';
+    return cb(new Error('Only image files are allowed!'), false);
   }
   return cb(null, true);
 };
 
-// Fields needed for the tuttor registration
-module.exports.tuttorFields = [
-  ['firstname', 'lastname', 'gender'],
-  [
-    'email',
-    'password',
-    'phoneNumber',
-    'address1',
-    'country',
-    'state',
-    'location',
-    'landMark',
-  ],
-];
+// Our File upload to storage initialisation
+// module.exports.uploadMulti = multer({
+//   storage,
+//   fileFilter,
+//   // limits: { fileSize: maxSize },
+// }).fields([
+//   { name: 'cv', maxCount: 1 },
+//   { name: 'pic', maxCount: 1 },
+// ]);
 
-// Our FIle upload to storage
-module.exports.uploadMulti = multer({
-  storage,
-  fileFilter,
-  // limits: { fileSize: maxSize },
-}).fields([
-  { name: 'cv', maxCount: 1 },
-  { name: 'pic', maxCount: 1 },
-]);
-
-// Our FIle upload to storage
-module.exports.upload = multer({
+// Read file in the request body for single files. Field name is image
+module.exports.readImage = multer({
   storage,
   fileFilter,
   limits: { fileSize: maxSize },
-}).single('cv');
+}).single('image');

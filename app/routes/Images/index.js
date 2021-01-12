@@ -25,10 +25,16 @@ route.all(
   })
 );
 
-// Retreiveing all states
+// Retreiveing an image from the repo
 route.get(
-  '/:mood/:width/:height',
+  '/getimage/:mood',
   asyncHandler((req, res) => ImagesController.getImage(req, res))
+);
+
+// Add an image to the repo
+route.post(
+  '/addimage',
+  asyncHandler((req, res) => ImagesController.addImage(req, res))
 );
 
 module.exports = route;

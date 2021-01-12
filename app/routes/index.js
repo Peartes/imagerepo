@@ -6,5 +6,5 @@
 const ImagesRoute = require('./Images');
 
 module.exports = (app) => {
-  app.use(`/images`, require(ImagesRoute));
+  app.use(`/images`, ImagesRoute);
 };

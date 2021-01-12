@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const config = require('../../lib/config');
 
-const mongoCollection = config.mongo.collections.Images;
+const mongoCollection = config.mongo.collections.images;
 
 const ImagesSchema = new mongoose.Schema(
   {

@@ -12,33 +12,19 @@ cloudinary.config({
 const streamify = require('streamifier');
 
 class Utils {
-  //  authenticate request parameters
-  async authenticateParams(passedJson, neededFields) {
-    const missingFields = [];
-    neededFields[0].forEach((element) => {
-      if (!passedJson.publicInfo[element]) {
-        missingFields.push('publicInfo' + element);
-      }
-    });
-    neededFields[1].forEach((element) => {
-      if (!passedJson.personalInfo[element]) {
-        missingFields.push('personalInfo: ' + element);
-      }
-    });
-    return missingFields;
-  }
-  // Upload image to Cloudinary
   /**
-   *
+   * @summary Upload an image to cloudinary
    * @param {File} data The image to upload
    * @param {String} key The file name or identifier for file
+   * @param {String} mood The mood of teh image
    * @returns response object with location field
    */
-  async uploadToCloud(data, key, mood) {
+  async uploadToCloud(data, mood) {
     return new Promise((resolve, reject) => {
       let cloudinaryStream = cloudinary.uploader.upload_stream(
         {
-          folder: mood + '/' + key,
+          folder: 'shopify/' + mood,
+          overwrite: true,
         },
         (err, response) => {
           if (err) {

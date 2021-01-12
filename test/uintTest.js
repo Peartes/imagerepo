@@ -1,11 +1,35 @@
 // Import the asserter
 const expect = require('chai').expect;
+// For express testing
+const supertest = require('supertest');
+// And now the application itself
+const app = require('../app/app');
+// For file upload
+const path = require('path');
 // Our logger
 const logger = require('../app/lib/logger');
 /* Test saving data to a database */
 const DatabaseHelper = require('../app/services/index');
 const ImagesModel = require('../app/models/Images/images');
 
+describe('To add an image to the repository', () => {
+  it('Add image to repo', (done) => {
+    supertest(app)
+      .post('/images/addimage')
+      .field('moods', JSON.stringify(['happy', 'sad']))
+      .attach('image', path.join(__dirname, './testImage.png'))
+      .end((err, res) => {
+        if (err) {
+          logger.error(err);
+          done(err);
+        } else {
+          logger.debug(res);
+          expect(res.status).to.equal(200);
+          done();
+        }
+      });
+  });
+});
 describe('Put ready images into the database', () => {
   it('Put calm images into database', async () => {
     let imagesUrl = [
@@ -58,50 +82,19 @@ describe('Put ready images into the database', () => {
         assert.isUndefined(error, 'Error occured saving services ' + error);
       });
   });
-
-  it('Get All States', (done) => {
-    supertest(app)
-      .get('/v1/locations/getAllStates')
-      .end((err, res) => {
-        if (err) {
-          done(err);
-        } else {
-          logger.debug(res);
-          expect(res.body.error).to.not.be.true;
-          expect(res.body.data).to.exist;
-          expect(res.body.data.status).to.equal(200);
-          expect(res.body.data.states).to.have.length.above(0);
-          logger.debug(res.body.data.states);
-          done();
-        }
-      });
-  });
 });
 
 describe('To get an image from the repository', () => {
-  it('Gets one random image based on mood', async () => {
-    // Insert into the database
-    await db
-      .saveBulk(states)
-      .then()
-      .catch((error) => {
-        assert.isUndefined(error, 'Error occured saving services ' + error);
-      });
-  });
-
-  it('Get All States', (done) => {
+  it('Get an image', (done) => {
     supertest(app)
-      .get('/v1/locations/getAllStates')
+      .get('/images/getimage/happy')
       .end((err, res) => {
         if (err) {
+          // logger.error(err);
           done(err);
         } else {
           logger.debug(res);
-          expect(res.body.error).to.not.be.true;
-          expect(res.body.data).to.exist;
-          expect(res.body.data.status).to.equal(200);
-          expect(res.body.data.states).to.have.length.above(0);
-          logger.debug(res.body.data.states);
+          expect(res.status).to.equal(200);
           done();
         }
       });

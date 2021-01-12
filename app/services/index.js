@@ -17,38 +17,13 @@ class MongoDBHelper {
   getRandomImage(mood) {
     return new Promise((resolve, reject) => {
       return this.mongodbModel
-        .aggregate([{ $match: { tags: { $in: mood } } }])
-        .lean()
+        .find({ tags: mood })
         .then((docs) => {
           return resolve(docs);
         })
         .catch((err) => {
           return reject(err);
         });
-    });
-  }
-
-  /**
-   * Fetches a single record from the connected MongoDB instance.
-   *
-   * @param params
-   * @returns {Promise}
-   */
-  get(params) {
-    return new Promise((resolve, reject) => {
-      const param = params.query || params;
-      const query = this.mongodbModel.findOne(param);
-
-      if (params.fields) {
-        query.select(params.fields);
-      }
-
-      return query.exec((err, modelData) => {
-        if (err) {
-          return reject(MongoDBHelper.handleError(err));
-        }
-        return resolve(modelData);
-      });
     });
   }
 
@@ -120,7 +95,7 @@ class MongoDBHelper {
   /**
    * Saves data into the MongoDB instance
    *
-   * @param data
+   * @param {object} data The data to save into the databse in proper schema
    * @returns {Promise}
    */
   save(data) {
@@ -152,38 +127,6 @@ class MongoDBHelper {
     );
   }
 
-  /**
-   *
-   * @param params the query string
-   */
-
-  deleteOne(params) {
-    return new Promise((resolve, reject) =>
-      this.mongodbModel.deleteOne(params, (error, response) => {
-        if (error) {
-          return reject(MongoDBHelper.handleError(error));
-        }
-        return resolve(response);
-      })
-    );
-  }
-
-  /**
-   * Delete MULTIPLE RECORDS from the MongoDB instance's DB based on some conditional criteria
-   *
-   * @param params - the conditional parameters
-   * @returns {Promise}
-   */
-  deleteBulk(params) {
-    return new Promise((resolve, reject) =>
-      this.mongodbModel.remove(params.conditions, (error, response) => {
-        if (error) {
-          return reject(MongoDBHelper.handleError(error));
-        }
-        return resolve(response);
-      })
-    );
-  }
   /**
    * Used to format the error messages returned from the MongoDB server during CRUD operations
    *
