@@ -16,7 +16,7 @@ class Images extends ImagesService {
   async getImage(req, res) {
     try {
       let result = await this.getRandomImage(req.params.mood);
-      if (result) {
+      if (result.length > 0) {
         // If we got an image for this particular mood, return them
         return Response.success(
           res,
@@ -31,7 +31,8 @@ class Images extends ImagesService {
         return Response.failure(
           res,
           {
-            message: 'No image matching your mood',
+            message:
+              'No image matching your mood. We are growing, so we shoud have them soon.',
             response: { status: 404 },
           },
           httpCode.NOT_FOUND

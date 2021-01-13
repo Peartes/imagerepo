@@ -30,8 +30,9 @@ describe('To add an image to the repository', () => {
       });
   });
 });
-describe('Put ready images into the database', () => {
-  it('Put calm images into database', async () => {
+
+describe('Put ready images into the repo', () => {
+  it('Put calm images into the repo', async () => {
     let imagesUrl = [
       {
         imageUri:
@@ -75,6 +76,7 @@ describe('Put ready images into the database', () => {
       },
     ];
     // Insert into the database
+    const db = new DatabaseHelper(ImagesModel);
     await db
       .saveBulk(imagesUrl)
       .then()
@@ -87,7 +89,7 @@ describe('Put ready images into the database', () => {
 describe('To get an image from the repository', () => {
   it('Get an image', (done) => {
     supertest(app)
-      .get('/images/getimage/happy')
+      .get('/images/getimage/calm')
       .end((err, res) => {
         if (err) {
           // logger.error(err);
@@ -95,6 +97,7 @@ describe('To get an image from the repository', () => {
         } else {
           logger.debug(res);
           expect(res.status).to.equal(200);
+          expect(res.text.data.image).to.have.length.above(0);
           done();
         }
       });
