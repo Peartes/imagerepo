@@ -74,7 +74,8 @@ So, you have a therapeutic image and want to add to the repo, yay. Here are a fe
 
 Once we have confirmed that the requirements are met, and the app is running, let's add an image to the repo.
 
-****NOTE**: I have an image in the test folder and i would be using that but as for you you'll replace the image path with yours.**
+**NOTE: I have an image in the test folder and i would be using that but as for you you'll replace the image path with yours.**
+
 You can use anything to call the endpoint, i am using curl in this tutorial. Run this command
 
 ```

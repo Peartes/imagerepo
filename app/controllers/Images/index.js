@@ -60,6 +60,17 @@ class Images extends ImagesService {
     try {
       // First read the files from the request object
       readImage(req, res, async (e) => {
+        // CHeck if file exist
+        if (!req.file || !req.file.buffer) {
+          return Response.failure(
+            res,
+            {
+              message: 'no image to upload',
+              response: { status: 400 },
+            },
+            httpCode.BAD_REQUEST
+          );
+        }
         // Check if the image read was of the right file type
         if (req.fileValidationError) {
           return Response.failure(
