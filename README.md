@@ -65,16 +65,21 @@ and confirm that all tests are passing as below
 
 Okay, let's use the app shall we. First we make sure we have the application set up and running well. You can make sure of that by running tests as described above.
 
-### First let's add an image to the repo
+### **_First let's add an image to the repo_**
 
 So, you have a therapeutic image and want to add to the repo, yay. Here are a few things to know:
 
-- Make sure you know the mood of the image. Well, for now we only take "happy" :happy:, "sad" :sad:, "calm" :calm: and "depressed" :sad: moods any other will be ignored.
+- Make sure you know the mood of the image. Well, for now we only take "happy" :smiley:, "sad" :pensive:, "calm" :relieved: and "depressed" :worried: moods any other will be ignored.
 - Also, allowed file types are jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF. Any other would be rejected sorry :cry:
 
 Once we have confirmed that the requirements are met, and the app is running, let's add an image to the repo.
 
-I have an image in the test folder and i would be using that but as for you you'll replace the image path with yours.
+****NOTE**: I have an image in the test folder and i would be using that but as for you you'll replace the image path with yours.**
+You can use anything to call the endpoint, i am using curl in this tutorial. Run this command
+
+```
+curl
+```
 
 ## Features
 
