@@ -99,7 +99,7 @@ class Images extends ImagesService {
           req.file.originalname,
           req.body.moods
         );
-        if (result) {
+        if (Object.keys(result).length > 0) {
           // If we got an image for this particular mood, return them
           return Response.success(
             res,
