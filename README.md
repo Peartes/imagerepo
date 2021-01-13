@@ -55,7 +55,7 @@ Create a file `.env` with the following contents:
 Confirm that the application is running properly by running tests using
 
 ```
-npm run tests
+npm run test
 ```
 
 and confirm that all tests are passing as below
@@ -67,14 +67,21 @@ Okay, let's use the app shall we. First we make sure we have the application set
 
 ### First let's add an image to the repo
 
-So, you have a therapeutic image and want to add to the repo, yay. Now, make sure you have the mood
+So, you have a therapeutic image and want to add to the repo, yay. Here are a few things to know:
+
+- Make sure you know the mood of the image. Well, for now we only take "happy", "sad", "calm" and "depressed" moods any other will be ignored.
+- Also, allowed file types are jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF. Any other would be rejected sorry :cry:
+
+Once we have confirmed that the requirements are met, and the app is running, let's add an image to the repo.
+
+I have an image in the test folder and i would be using that but as for you you'll replace the image path with yours.
 
 ## Features
 
-List of features ready and TODOs for future development
-
 - Add an image to the repo
+  - route : /baseurl/images/addimage
 - Get an image from the repo
+  - route : /baseurl/images/getimage/:mood?w=xcm&h=ycm
 
 ## Inspiration
 
