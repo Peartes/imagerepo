@@ -79,7 +79,7 @@ class Images extends ImagesService {
             httpCode.BAD_REQUEST
           );
         }
-        logger.info('File validation complete');
+        // logger.info('File validation complete');
         // Parse the body to a json object
         req.body.moods = JSON.parse(req.body.moods);
         // Addd the image to the database
