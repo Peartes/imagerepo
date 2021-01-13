@@ -69,7 +69,7 @@ Okay, let's use the app shall we. First we make sure we have the application set
 
 So, you have a therapeutic image and want to add to the repo, yay. Here are a few things to know:
 
-- Make sure you know the mood of the image. Well, for now we only take "happy", "sad", "calm" and "depressed" moods any other will be ignored.
+- Make sure you know the mood of the image. Well, for now we only take "happy" :happy:, "sad" :sad:, "calm" :calm: and "depressed" :sad: moods any other will be ignored.
 - Also, allowed file types are jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF. Any other would be rejected sorry :cry:
 
 Once we have confirmed that the requirements are met, and the app is running, let's add an image to the repo.
