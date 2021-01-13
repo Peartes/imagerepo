@@ -17,7 +17,7 @@ class MongoDBHelper {
   getRandomImage(mood) {
     return new Promise((resolve, reject) => {
       return this.mongodbModel
-        .aggregate([{ $match: { tags: mood } }])
+        .aggregate([{ $match: { tags: mood } }, { $sample: { size: 1 } }])
         .then((docs) => {
           return resolve(docs);
         })
