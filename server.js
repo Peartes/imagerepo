@@ -10,5 +10,5 @@ module.exports = app.listen(config.port, () =>
 // If an error happens in our promises, quit app
 process.on('unhandledRejection', (reason, promise) => {
   logger.error('Error in a promise. Error is :', reason, promise);
-  process.exit(1);
+  // process.exit(1);
 });
