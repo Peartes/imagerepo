@@ -101,7 +101,20 @@ class Images extends ImagesService {
         }
         // logger.info('File validation complete');
         // Parse the body to a json object
-        req.body.moods = JSON.parse(req.body.moods);
+        try {
+          req.body.moods = JSON.parse(req.body.moods);
+        } catch (err) {
+          logger.error('An error occured adding your image for this mood :(');
+          return Response.failure(
+            res,
+            {
+              message: 'Error Parsing your request :(',
+              response: err,
+            },
+            httpCode.BAD_REQUEST
+          );
+        }
+
         // Addd the image to the database
         let result = await this.addSingleImage(
           req.file.buffer,
@@ -131,7 +144,7 @@ class Images extends ImagesService {
         }
       });
     } catch (error) {
-      logger.error('An error occuredadding your image for this mood :(');
+      logger.error('An error occured adding your image for this mood :(');
       return Response.failure(
         res,
         {
