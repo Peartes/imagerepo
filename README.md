@@ -1,6 +1,6 @@
 # Therapeutic Images Repository
 
-> It is simple. We provide on-demand therapeutic images (a.k.a images based on moods) for therapist helping struggling clients get back to their normal lives.
+> Get on-demand therapeutic images (a.k.a images based on moods). For therapist helping struggling clients get back to their normal lives.
 
 So please select from the table of contents what part of the app to explore.
 
@@ -148,16 +148,16 @@ For any size of the image, add the query strings _w_(width in cm) and _h_(height
 
 ## Architecture
 
-The app has 2 mai feature as descibed in above. Below is a diagramatic top-level view of the app architecture
+The app has 2 main feature as descibed in above. Below is a diagramatic top-level view of the app architecture
 
 ### **APP ARCHITECTURAL DIAGRAM**
 
 ![App Architecture](./img/imageRepo.png)
 
-It is pretty simple.
+It is pretty simple -
 
 - The user needs an image and communicates that to the user application (browser, another app or any ui software).
-- The application then requests from an image from the server using the endpoint shown in the diagram
+- The application then requests for an image from the server using the endpoint shown in the diagram
 - The server communicates with the database to get an image uri that matches your mood (the one you passed)
 - The database returns one randomly selected image
 - The server respond to the application returning the uri of the image
@@ -166,6 +166,17 @@ It is pretty simple.
 - The application then displays the image to the needing user
 
 The architecture uses the _get and image_ feature to explain the flow. The architecture is similar with the same components (although now they are acting differently) when adding an image as described below.
+
+![App Architecture](./img/imageRepoAdd.png)
+
+Here we want to add an image
+
+- The user needs to add an image and communicates that to the user application (another app or any software).
+- The application then sends the imaeg to the server with the moods tag of the image
+- The server saves the image in cloudinary
+- Cloudinary then returns a uri for the image
+- The server saves the uri in the database and
+- Returns a success message to the user application
 
 ## Inspiration
 
