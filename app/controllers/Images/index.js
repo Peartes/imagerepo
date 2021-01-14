@@ -119,7 +119,7 @@ class Images extends ImagesService {
             httpCode.BAD_REQUEST
           );
         }
-
+        console.log('file is ', req.file.buffer);
         // Addd the image to the database
         let result = await this.addSingleImage(
           req.file.buffer,
