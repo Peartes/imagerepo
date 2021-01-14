@@ -24,7 +24,6 @@ class Utils {
       let cloudinaryStream = cloudinary.uploader.upload_stream(
         {
           folder: 'shopify/' + mood,
-          overwrite: true,
         },
         (err, response) => {
           if (err) {
