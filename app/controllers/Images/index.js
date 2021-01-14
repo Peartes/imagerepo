@@ -19,14 +19,19 @@ class Images extends ImagesService {
       if (result.length > 0) {
         // If we got an image for this particular mood, return them
         // But, first check if a specific width was requested
-        let imageUri = result[0].imageUri.split('upload/');
-        if (!isNaN(parseInt(req.query.w))) {
-          imageUri[0] = imageUri[0] + 'w_' + parseInt(req.query.w);
+        if (Object.keys(req.query).length > 0) {
+          let imageUri = result[0].imageUri.split('upload/');
+          imageUri[0] = imageUri[0] + 'upload/';
+          if (!isNaN(parseInt(req.query.w))) {
+            imageUri[0] = imageUri[0] + 'w_' + parseInt(req.query.w);
+          }
+          if (!isNaN(parseInt(req.query.h))) {
+            imageUri[0] = imageUri[0] + ',h_' + parseInt(req.query.h) + '/';
+          } else {
+            imageUri[0] = imageUri[0] + '/';
+          }
+          result[0].imageUri = imageUri.join('');
         }
-        if (!isNaN(parseInt(req.query.h))) {
-          imageUri[0] = imageUri[0] + ',h_' + parseInt(req.query.h) + '/';
-        }
-        result.imageUri = imageUri.join('');
         return Response.success(
           res,
           {

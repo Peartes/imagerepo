@@ -89,13 +89,13 @@ describe('Put ready images into the repo', () => {
 describe('To get an image from the repository', () => {
   it('Get an image', (done) => {
     supertest(app)
-      .get('/images/getimage/calm?w=100')
+      .get('/images/getimage/calm?w=100&h=200')
       .end((err, res) => {
         if (err) {
           // logger.error(err);
           done(err);
         } else {
-          // logger.debug(res);
+          logger.debug(res);
           expect(res.status).to.equal(200);
           //expect(res.text.data.image).to.have.length.above(0);
           done();
