@@ -16,7 +16,7 @@ describe('To add an image to the repository', () => {
   it('Add image to repo', (done) => {
     supertest(app)
       .post('/images/addimage')
-      .field('moods', JSON.stringify(['happy', 'sad']))
+      .field('moods', JSON.stringify(['depressed']))
       .attach('image', path.join(__dirname, './testImage.png'))
       .end((err, res) => {
         if (err) {
@@ -89,7 +89,7 @@ describe('Put ready images into the repo', () => {
 describe('To get an image from the repository', () => {
   it('Get an image', (done) => {
     supertest(app)
-      .get('/images/getimage/calm')
+      .get('/images/getimage/calm?w=100')
       .end((err, res) => {
         if (err) {
           // logger.error(err);

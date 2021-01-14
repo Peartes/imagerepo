@@ -19,7 +19,7 @@ class Images extends ImagesService {
       if (result.length > 0) {
         // If we got an image for this particular mood, return them
         // But, first check if a specific width was requested
-        let imageUri = result.imageUri.split('upload/');
+        let imageUri = result[0].imageUri.split('upload/');
         if (!isNaN(parseInt(req.query.w))) {
           imageUri[0] = imageUri[0] + 'w_' + parseInt(req.query.w);
         }
@@ -48,7 +48,7 @@ class Images extends ImagesService {
         );
       }
     } catch (error) {
-      logger.error('An error occured getting an image for this mood :(');
+      logger.error('An error occured getting an image for this mood :(', error);
       return Response.failure(
         res,
         {
