@@ -112,8 +112,9 @@ gives the response
         "_id":"5fff231fff32fd698a317021",
         "tags":["happy","sad"],
         "imageUri":"https://res.cloudinary.com/
-        dwhrr1qfw/image/upload/v1610556191/
-        shopify/happy/s3ml2kdlwhcubc2k8r1d.png",
+                    dwhrr1qfw/image/upload/v1610556191/
+                    shopify/happy/s3ml2kdlwh
+                    cubc2k8r1d.png",
         "createdAt":"2021-01-13T16:43:11.685Z",
         "updatedAt":"2021-01-13T16:43:11.685Z",
         "__v":0
@@ -133,6 +134,7 @@ The property of the response are:
   - image : The image you requested for (your happy image)
     - tags : This are the moods the image could represent. They are also yardsticks to confirm that the image you receive is indeed for your mood
     - imageUri : This is the image resource identifier, use this to view your image. Copy and paste it into a browser.
+- message : This property gives a brief description on the status of the request
 
 Every other property are metadata and can be ignored.
 For any size of the image, add the query strings _w_(width in cm) and _h_(height in cm). The response is the same.
@@ -143,6 +145,27 @@ For any size of the image, add the query strings _w_(width in cm) and _h_(height
   - route : /baseurl/images/addimage
 - Get an image from the repo
   - route : /baseurl/images/getimage/:mood?w=xcm&h=ycm
+
+## Architecture
+
+The app has 2 mai feature as descibed in above. Below is a diagramatic top-level view of the app architecture
+
+### **APP ARCHITECTURAL DIAGRAM**
+
+![App Architecture](./img/imageRepo.png)
+
+It is pretty simple.
+
+- The user needs an image and communicates that to the user application (browser, another app or any ui software).
+- The application then requests from an image from the server using the endpoint shown in the diagram
+- The server communicates with the database to get an image uri that matches your mood (the one you passed)
+- The database returns one randomly selected image
+- The server respond to the application returning the uri of the image
+- Then the application uses the uri to request the image from cloudinary
+- Cloudinary returns the image matching the uri
+- The application then displays the image to the needing user
+
+The architecture uses the _get and image_ feature to explain the flow. The architecture is similar with the same components (although now they are acting differently) when adding an image as described below.
 
 ## Inspiration
 
