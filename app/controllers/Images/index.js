@@ -18,6 +18,15 @@ class Images extends ImagesService {
       let result = await this.getRandomImage(req.params.mood);
       if (result.length > 0) {
         // If we got an image for this particular mood, return them
+        // But, first check if a specific width was requested
+        let imageUri = result.imageUri.split('upload/');
+        if (!isNaN(parseInt(req.query.w))) {
+          imageUri[0] = imageUri[0] + 'w_' + parseInt(req.query.w);
+        }
+        if (!isNaN(parseInt(req.query.h))) {
+          imageUri[0] = imageUri[0] + ',h_' + parseInt(req.query.h) + '/';
+        }
+        result.imageUri = imageUri.join('');
         return Response.success(
           res,
           {
