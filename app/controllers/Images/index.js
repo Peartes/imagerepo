@@ -72,6 +72,9 @@ class Images extends ImagesService {
    */
   async addImage(req, res) {
     try {
+      logger.info('key ', process.env.cloudinaryApiKey);
+      logger.info('secret ', process.env.cloudinaryApiSecret);
+      logger.info('name ', process.env.cloudinarCloudName);
       // First read the files from the request object
       readImage(req, res, async (e) => {
         // CHeck if file exist
@@ -119,7 +122,6 @@ class Images extends ImagesService {
             httpCode.BAD_REQUEST
           );
         }
-        console.log('file is ', req.file.buffer);
         // Addd the image to the database
         let result = await this.addSingleImage(
           req.file.buffer,
