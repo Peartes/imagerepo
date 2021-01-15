@@ -74,13 +74,48 @@ So, you have a therapeutic image and want to add to the repo, yay. Here are a fe
 
 Once we have confirmed that the requirements are met, and the app is running, let's add an image to the repo.
 
-**NOTE: I have an image in the test folder and i would be using that but as for you you'll replace the image path with yours.**
+**NOTE: I have an image in the /img folder and i would be using that but as for you you'll replace the image path with yours or just use mine :smile:.**
 
 You can use anything to call the endpoint, i am using curl in this tutorial. Run this command
 
 ```
-curl
+curl -v -F 'moods=["Insert your mood here"]' -F 'image=@./img/testImage.png' https://therapeuticimages.herokuapp.com/images/addimage
 ```
+
+Adding the test image with mood of happy and sad gives the fowllowing response
+
+```JSON
+  {
+    "error":false,
+    "code":200,
+    "data":{
+      "status":200,
+      "image":{
+        "tags":["happy", "sad"],
+        "_id":"6001da1ce8ad480017fa5541",
+        "imageUri":"https://res.cloudinary.com/
+        dwhrr1qfw/image/upload/
+        v1610734108/shopify/happy/
+        wjfkrwb4lpzaeypyb5kl.png",
+        "createdAt":"2021-01-15T18:08:29.013Z",
+        "updatedAt":"2021-01-15T18:08:29.013Z",
+        "__v":0
+      }
+    },
+        "message":"Added your image. Thank you for contributing"
+  }
+```
+
+The property of the response are:
+
+- error : True for succesfull request and false otherwise
+- code: The status code of the request 200 for successfull, any other code signifies failure
+- data : The response object
+  - status : similar to code
+  - image : The image you added
+    - tags : This are the moods the image could represent.
+    - imageUri : This is the image resource identifier, use this to view your image. Copy and paste it into a browser.
+- message : A little thamk you note
 
 ### **_Now let's get an image from the repo_**
 
